@@ -58,7 +58,15 @@ class Authcontroller extends Controller
 		} else if($request->usertype == 'teacher') { // Teacher Page
 
 
-			if($request->school_id == '1') {
+			if($request->school_id == '1') { // Victoria school
+
+				if(auth()->guard('teacher')->attempt(['username' => $request->username , 'password' => $request->password , 'school_id' => $request->school_id ])) {
+
+					return redirect('teacher/home');
+				} else {
+
+					return redirect()->back()->with(['user' => 'not found']);
+				}
 
 				return 'welcome Teacher You Are Now In American School';
 
@@ -90,8 +98,27 @@ class Authcontroller extends Controller
 		}
 	}
 
+	function get_guard(){
+		if(Auth::guard('admin')->check())
+			{return "admin";}
+		elseif(Auth::guard('teacher')->check())
+			{return "user";}
+		// elseif(Auth::guard('client')->check())
+		// 	{return "client";}
+	}
+
 	public function logout () {
-		Auth::guard($this->get_guard())->logout();
+
+if(Auth::guard('admin')->check() == 1) {
+		Auth::guard('admin')->logout();
+		return redirect('user/login');
+
+
+}else if(Auth::guard('teacher')->check() == 1) {
+		Auth::guard('teacher')->logout();	
+		return redirect('user/login');
+}
+	
 		return redirect('user/login');
 		// Auth::logout();
 		if(Auth::check()) 
@@ -103,14 +130,7 @@ class Authcontroller extends Controller
         return redirect('admin/add_student');
 	}
 
-	function get_guard(){
-		if(Auth::guard('admin')->check())
-			{return "admin";}
-		elseif(Auth::guard('user')->check())
-			{return "user";}
-		elseif(Auth::guard('client')->check())
-			{return "client";}
-	}
+
 
 
 

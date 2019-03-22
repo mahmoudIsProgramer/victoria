@@ -16,16 +16,21 @@ class CreateMaterialFilesTable extends Migration
         Schema::create('material_files', function (Blueprint $table) {
             $table->increments('id');
 
+            // name of the file will inserted on db 
+            $table->string('image');  
             
-            $table->string('file_name');
+            // name of the file will inserted on db  and will displayed for the user  (without extention) 
+            $table->string('file_name'); 
             
             $table->enum('type', ['video', 'file']);
 
             $table->integer('material_id')->unsigned()->nullable();
             $table->integer('teacher_id')->unsigned()->nullable();
+            $table->integer('class_id')->unsigned()->nullable();
 
             $table->foreign('material_id')->references('id')->on('materials')->onDelete('cascade');
             $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
+            $table->foreign('class_id')->references('id')->on('classes')->onDelete('cascade');
             
             $table->timestamps();
         });

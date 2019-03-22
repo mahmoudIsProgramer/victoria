@@ -27,10 +27,11 @@
     <script src="{{asset('admin')}}/js/index.js"></script> 
     <script src="{{asset('admin')}}/js/add_student.js"></script> 
     <script src="{{asset('admin')}}/js/add_teacher.js"></script> 
+    <script src="{{asset('admin')}}/js/set_schedule.js"></script> 
 
 
 
-    {{-- @yield('script') --}}
+     @yield('script') 
 
 </body>
 </html>

@@ -25,6 +25,11 @@ class CreateResultsTable extends Migration
             $table->integer('material_id')->unsigned()->nullable();
             $table->integer('result'); 
             
+            $table->enum('term' , ['1' , '2'])->nullable();
+            $table->integer('year')->nullable();
+            $table->integer('resultfrom')->nullable();
+
+            
             $table->foreign('school_id')->references('id')->on('schools')->onDelete('cascade');
             $table->foreign('level_id')->references('id')->on('levels')->onDelete('cascade');
             $table->foreign('year_id')->references('id')->on('years')->onDelete('cascade');

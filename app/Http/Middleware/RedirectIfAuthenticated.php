@@ -21,18 +21,18 @@ class RedirectIfAuthenticated
         //     return redirect('/home');
         // }
 
-        if (Auth::guard($guard)->check()) {
-            return redirect('admin.add_student');
-        }
+        // if (Auth::guard($guard)->check()) {
+        //     return redirect('admin.add_student');
+        // }
         switch ($guard) {
             case 'admin':
                 if (Auth::guard($guard)->check()) {
                     return redirect('admin/add_student');
                 }
                 break;
-            case 'doctor':
+            case 'teacher':
                 if (Auth::guard($guard)->check()) {
-                    // return redirect()->route('doctor.dashboard');
+                    return redirect('teacher/home');
                 }
                 break;
             case 'consultant':

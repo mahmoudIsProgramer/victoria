@@ -16,7 +16,6 @@
                         {{ csrf_field() }}
                         <input type="hidden" name="materials_selectbox_names">
                     
-                        
                         @include('partials.errors')
                         @include('partials.success_insert')
 
@@ -45,6 +44,7 @@
                                 </select>
                             </div>
                         </div>
+                        
                         <div class="col-12 ">
                             <div class=" my-4 teacher-grades">
                             <div class="grade-details mb-1 ">
@@ -56,21 +56,21 @@
                             
                             </div>
                         </div>
-                        <div class="col-12 materials">
-                            <div class="input-group mb-2">
-                                {{--  <select name = 'material_id'  required autofocus class="form-control" >
-                                <option value = '' >Material</option>
-                                @foreach ($materials as  $material )
-                                    <option value="{{ $material->id }}">{{ $material->name }}</option>
-                                @endforeach
-                                </select>  --}}
+
+                        {{--  This div contain materials   --}}
+                        <div class="col-12">
+                            <div class="input-group mb-2 materials">
+                                
                             </div>
                         </div>
+                        
+                        
                         <div class="col-12">
                             <div class="input-group mb-2">
                                 <input name = 'name' required autofocus  value = "{{ old('name')}}" type="text" class="form-control" placeholder="Name">
                             </div>
                         </div>
+
                         <div class="col-12">
                             <div class="input-group mb-2">
                                 <input name= 'phone' type="text"  value = "{{ old('phone')}}" class="form-control" placeholder="Mobile Number (optional)">

@@ -15,11 +15,11 @@ class CreateTeacherMaterialTable extends Migration
     {
         Schema::create('teacher_material', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('teacher_id')->unsigned();
             $table->integer('material_id')->unsigned();
+            $table->integer('teacher_id')->unsigned();
 
-            $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
             $table->foreign('material_id')->references('id')->on('materials')->onDelete('cascade');
+            $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
             $table->timestamps();
         });
     }

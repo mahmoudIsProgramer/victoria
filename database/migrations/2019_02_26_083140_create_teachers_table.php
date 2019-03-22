@@ -14,16 +14,19 @@ class CreateTeachersTable extends Migration
     public function up()
     {
         Schema::create('teachers', function (Blueprint $table) {
+            
             $table->increments('id');
             
             $table->string('name');
             
             $table->string('username');
             $table->string('password');
-            $table->string('phone');
-            $table->string('address');
-            $table->string('email');
-
+            $table->string('image')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('address')->nullable();
+            $table->string('email')->nullable();
+            $table->rememberToken();            
+            $table->enum('type' , ['0','1'])->default('0');
 
 
 

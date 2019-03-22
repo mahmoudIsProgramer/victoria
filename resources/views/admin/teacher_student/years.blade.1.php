@@ -29,9 +29,17 @@
                         @foreach ( $years as $year  )
                             <div class="col-md-4 col-sm-6 mb-2">
                                 <div class="school">
-                                    <a href="{{url('admin/teacher/materials').'/'.$school_id.'/'.$level_id.'/'.$year->id}}">
+                                @if( $unknown != 'AllTeachers')
+                                    <a href="{{url('/admin/'.$unknown.'/classes').'/'.$school_id.'/'.$level_id.'/'.$year->id}}">
                                         <h3 class="btn-warning text-center py-5">{{$year->name}}</h3>
                                     </a>
+                                @else
+
+                                <a href="{{url('/admin/materials').'/'.$school_id.'/'.$level_id.'/'.$year->id}}">
+                                    <h3 class="btn-warning text-center py-5">{{$year->name}}</h3>
+                                </a>                               
+
+                                @endif    
                                 </div>
                             </div>
                         @endforeach

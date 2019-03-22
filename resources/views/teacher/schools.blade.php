@@ -25,7 +25,7 @@
                         
                         <div class="col-md-4 col-sm-6 mb-2">
                             <div class="school">
-                            <a href="{{ url('admin/student/levels').'/'.$school_id }}">
+                            <a href="{{ url('/teacher/'.$unknown.'/levels').'/'.$school_id }}">
                                 <h3 class="btn-warning text-center py-5">{{ $school->name }}</h3>
                             </a>
                             </div>

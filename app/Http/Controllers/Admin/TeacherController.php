@@ -21,7 +21,6 @@ class TeacherController extends Controller
         return view('admin.add_teacher',compact(['materials','levels'])); 
     }
     public function add_teacher_post( Request $request){
-        // dd(explode(',',request("materials_selectbox_names"))); 
         $this->validate(request(), [
             
             'name' => 'required',
@@ -37,7 +36,6 @@ class TeacherController extends Controller
             
         ]);
         
-        // dd(request('classes')); 
         if(request()->image){
 
             $image = $request->image;         
@@ -74,7 +72,7 @@ class TeacherController extends Controller
         if( request('materials_selectbox_names') ) {
             $selectBoxNames = explode(',',request("materials_selectbox_names"));
 
-            foreach($selectBoxNames as $material_id) {
+            foreach( $selectBoxNames as $material_id ) {
                 DB::table('teacher_material')->insert([
                     'teacher_id'=>$teacher->id,
                     'material_id' => request($material_id) ,
@@ -82,19 +80,18 @@ class TeacherController extends Controller
                 }
         }
         // end  attach materials to teacher 
-
-
-
         return redirect()->back()->with(['success_insert'=>'Success Added Teacher']);
-
     }
-    
-    public function get_years( Request $request){
+    // get years  in this level  by level_id 
+    public function get_years( Request $request)
+    {
         $years = Year::where('level_id',request('level_id'))->get(); 
         
         return response()->json([ 'years'=>$years  ]);
     }
 
+
+    // get classes and  materials in this year by  ( year_id )
     public function get_classes(Request $request )
     {
         $year  = Year::find(request('year_id')); 
@@ -106,74 +103,5 @@ class TeacherController extends Controller
                 'year' => $year  ,
                 ]);
     }
-
-    // start all teacher functions 
-
-    // get school years belong to admin (shcools page)
-    public function schools(Request $request )
-    {
-        $school_id = request('school_id') ;
-        $school = School::where('id', $school_id )->first(); 
-        // $school = School::where('school_id',auth()->user()->school_id)->first(); 
-        return view('admin.teacher.schools',compact([ 'school' , 'school_id' ]));
-    } // end func
     
-    // get school years belong to admin (shcools page)
-    public function levels(Request $request )
-    {
-        $school_id = request('school_id') ;
-        $levels = Level::where('school_id', $school_id )->get(); 
-        return view('admin.teacher.levels',compact([ 'levels' , 'school_id' ]));
-    } // end func
-
-    // get school years belong to admin (shcools page)
-    public function years(Request $request )
-    {
-        $school_id = request('school_id') ;
-        $level_id  = request('level_id') ;
-        $years = Year::where([
-            'school_id' => $school_id ,
-            'level_id'  => $level_id
-        ])->get(); 
-        // $school = School::where('school_id',auth()->user()->school_id)->first(); 
-        return view('admin.teacher.years',compact(['years','school_id','level_id']));
-    } // end func
-    
-    // get get classes of one year 
-    public function materials(Request $request )
-    {
-    
-        $school_id  = request('school_id') ;
-        $level_id   = request('level_id') ;
-        $year_id    = request('year_id') ;
-        $materials = Material::where([
-            'school_id' => $school_id ,
-            'level_id'  => $level_id , 
-            'year_id'   => $year_id  
-            ])->get(); 
-
-        return view('admin.teacher.materials',compact(['materials','school_id','level_id','year_id']));
-    } // end func
-
-    // get all students in one  classes  
-    public function teachers_on_material(Request $request )
-    {
-    
-
-        $school_id = request('school_id') ;
-        $level_id   = request('level_id') ;
-        $year_id = request('year_id') ;
-        $material_id = request('material_id') ;
-        // $teachers = Teacher::where('material_id', $material_id )->get(); 
-
-        $teachers_ids = DB::table('teacher_material')->where('material_id',$material_id)->pluck('teacher_id') ; 
-        $teachers = Teacher::whereIn('id',$teachers_ids)->get() ; 
-        return view('admin.teacher.teachers_on_material',compact(['teachers','school_id','level_id','year_id' , 'material_id' ]));
-
-    } // end func
-    // end all teacher functions 
-
-
-
-
 }

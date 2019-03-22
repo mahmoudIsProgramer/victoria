@@ -22,9 +22,11 @@ class CreateHomeWorksTable extends Migration
             
             $table->integer('material_id')->unsigned()->nullable();
             $table->integer('teacher_id')->unsigned()->nullable();
+            $table->integer('class_id')->unsigned()->nullable();
 
             $table->foreign('material_id')->references('id')->on('materials')->onDelete('cascade');
             $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
+            $table->foreign('class_id')->references('id')->on('classes')->onDelete('cascade');
             
 
             $table->timestamps();

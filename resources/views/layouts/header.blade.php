@@ -13,8 +13,11 @@
                 </button>
 
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
                     @if(auth()->guard('admin')->check())
+
                     {{auth()->guard('admin')->user()->usernname}}
+
                         <a href="{{ route('logout') }}" class="dropdown-item" 
                         onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
@@ -24,6 +27,35 @@
                         <form id="logout-form" action="{{ url('user/logout') }}" method="POST" style="display: none;">
                             {{ csrf_field() }}
                         </form>
+
+                    @elseif(auth()->guard('teacher')->check())
+
+                    {{auth()->guard('teacher')->user()->usernname}}
+
+                        <a href="{{ route('logout') }}" class="dropdown-item" 
+                        onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                        Logout
+                        </a>
+
+                        <form id="logout-form" action="{{ url('user/logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+
+                  {{--  @elseif(auth()->guard('student')->check())
+
+                    {{auth()->guard('student')->user()->usernname}}
+
+                        <a href="{{ route('logout') }}" class="dropdown-item" 
+                        onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                        Logout
+                        </a>
+
+                        <form id="logout-form" action="{{ url('user/logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form> --}}
+
                      @endif
                         {{-- <a class="dropdown-item" href="#">Logout</a> --}}
                     </div>

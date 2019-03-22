@@ -11,9 +11,10 @@ $(document).ready(function () {
 
         $.ajax({
         
-            url:"/admin/get_classes",
+            url:"/admin/get_classes?year_id="+$(this).val(),
             method:'get',
-            data:{ year_id:$(this).val() },
+            data:{  },
+            beforeSend: function () {  },
             success:function(data)
             {
                 $('.class_id').append(data.options);

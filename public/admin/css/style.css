@@ -1,6 +1,7 @@
 /*common styles*/
 body{
  font-family: 'Alice';
+ overflow-x:hidden;
 }
 i,h1,button{
    color:#2B214A;
@@ -47,7 +48,7 @@ background-color:white;
 @media(min-width:1200px){
  .sidebar{
   height:100%;
-  background-color:#221447;
+  background-color:#333547;
   width:230px;
  }
  .sidebar .closebtn{
@@ -75,14 +76,13 @@ background-color:white;
 }
 .member-login .input-group-text{
   background-color:#fff;
-  border-top-left-radius: 30px;
-   border-bottom-left-radius: 30px;
+ border-left:#fff;
    padding:20px;
    border-right:#fff;
 }
 
 .member-login  input{
-   padding:30px;
+   padding:30px 0;
    border-left:#fff;
    border-top-right-radius: 30px;
    border-bottom-right-radius: 30px;
@@ -100,28 +100,215 @@ background-color:white;
     -moz-box-shadow: 10px 10px 5px 0px rgba(43, 33, 73, 0.15);
     box-shadow: 10px 10px 5px 0px rgba(43, 33, 73, 0.15);
 }
+
+/*/////////////////////////////////////////////////*/
+/*add teacher*/
+ .member-login .nav-tabs .nav-link {
+ border: 1px solid rgba(43, 33, 73, 0.18) ;
+}
+/*//////////////////////////////////////////////////*/
+/*add-teacher*/
+@media(min-width:1200px) and (max-width:1350px){
+ .member-login .fa-chalkboard-teacher{
+margin-left:100px;
+}
+}
+/*/////////////////////////////////////////////////*/
+/*all students*/
+.students-details,.all-attendance-show,.answers-show {
+ overflow-x:scroll;
+}
+/*///////////////////////////////////////////////////*/
+/*welcome admin*/
+.welcome-admin img{
+ border-radius:30px;
+ height:80vh;
+ object-fit:cover;
+}
+/*/////////////////////////////////////////////////////*/
+/*add teacher*/
+.teacher-grades .form-check{
+ background-color:#ffc107;
+ margin:2px;
+}
+.teacher-grades .form-check-inline{
+  background-color:#fff ;
+ margin:0;
+}
+.grade-details{
+ border:1px solid rgb(224, 219, 219);
+}
+.grade-classes{
+ display:none;
+}
+/*//////////////////////////////////////////////////////*/
+/*attendance*/
+/*custom check box*/
+.student-attendance .form-check{
+ border-bottom:1px solid rgb(234, 234, 234);
+ padding:2px;
 }
 
+.student-attendance .custom-control-label::before,
+.all-attendance-show .custom-control-label::before  {
+    background-color: #ffffff !important;
+    border: 1px solid #ecbe1f;
+    width: 1.25rem;
+    height: 1.25rem;
+}
+.student-attendance .custom-control-label::after {
+    
+    width: 1.25rem;
+    height: 1.25rem;
+}
+.student-attendance label {
+       font-size: 20px;
+    padding:1px 3px;
+}
+.student-attendance .custom-checkbox .custom-control-input:checked~.custom-control-label::after,
+.all-attendance-show .custom-checkbox .custom-control-input:checked~.custom-control-label::after{
+ background-color:#221447;
+ padding:10px;
+}
+/*end custom check box*/
+/*//////////////////////////////////////////////////////////////////////////////////////*/
+/*materials*/
+.material-tab{
+  display:flex;
+  align-items: center;
+  justify-content:center ;
+}
+.material-tab ul{
+    border: 1px solid #dcd4d4;
+    border-top: none;
+    border-radius: 4px;
+    padding: 0 30px;
+}
+.file{
+  border:1px solid #fff;
+}
+.file i{
+  cursor:pointer;
+  color:red;
+  font-size:20px;
+  background-color:white;
+  padding:2px;
+  border:1px solid #bfc0bf;
+  border-radius:17%;
+  margin-right:2px;
+}
+.material-tab .nav-pills .nav-link.active, .nav-pills .show>.nav-link{
+  background-color:#ecbe1f;
+  border-radius: 30px ;
+  padding:6px 30px;
+}
 
+/*custom bootstrap input file*/
+.file-upload .custom-file-label {
+  position:unset;
+  height:150px;
+  border: 1px solid #fff;
+  border-radius: .25rem;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.file-upload .custom-file-label::after {
+ 
+  display:none;
+ 
+}
+/*end custom bootstrap input file*/
+.file-upload{
+  border:1px solid #ecbe1f;
+  padding:10px;
+  width:200px;
+  margin-bottom:10px;
+}
+/*/////////////////////////////////////////////////////////////////////*/
+/* hw answer*/
+.hw-content{
+  height:100px;
+  width:100px;
+  object-fit:contain;
+  cursor:pointer;
+}
+/*////////////////////////////////////////////////////////////////////////*/
+/*profile teacher*/
+.teacher-image img{
+  height:200px;
+  object-fit: contain;
+}
 
+/*///////////////////////////////////////////////////////////////////////////*/
+/*admin add event*/
+.admin-event i,.gallary-detail i{
+  cursor: pointer;
+}
+.old-events {
+  display:flex;
+  align-items: center;
+  justify-content: center
+}
+.event-card{
+  border:1px solid #dcc166;
+  width:310px;
+  padding:4px;
+}
+.event-head,.date,.gallary-head{
+  display:flex;
+  justify-content: space-between;
+}
+.event-image{
+  height:300px;
+  width:300px;
+  position: relative;
+}
+.event-image img{
+  object-fit: contain;
+}
+.event-date{
+  position: absolute;
+  bottom:20%;
+  left:50%;
+  transform:translate(-50%);
+}
+.event-card span{
+  color:grey;
+}
+/*/////////////////////////////////////////////////////////////////////////////////*/
+/*gallary*/
+.gallary-form{
+  display: flex;
+  flex-direction: column;
+ 
+}
+.gallary-form input{
+  padding:1px;
+}
 
+.gallary-card img{
+  max-height:300px;
+  object-fit: contain;
+  transition:all 1s;
+}
+.gallary-image{
+  text-align: center;
+ 
+ overflow:hidden;
+}
+.gallary-image img:hover{
+  transform:scale(1.2,1.2);
+  opacity:.3;
+}
+.gallary-card{
+  border:1px solid #dcc166;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
+/*//////////////////////////////////////////////////////////////////////////////////////*/
+/*result*/
+.grades-success-details a{
+ 
+  background-color:#ece1ff;
+}

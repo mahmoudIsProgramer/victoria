@@ -3,9 +3,9 @@ $(document).ready(function () {
     var materials_selectbox_names = [];
 
     $( ".level_id" ).change(function() {
-        // $('.class_id').find('option[value!=""]').remove(); 
+        
         $(document).find('.years').empty();
-        // alert($(this).val()); 
+        $(document).find('.materials').empty();
 
         $.ajaxSetup({
             headers: {
@@ -15,12 +15,12 @@ $(document).ready(function () {
 
         $.ajax({
         
-            url:"/admin/get_years",
+            url:"/admin/get_years?level_id="+$(this).val(),
             method:'get',
-            data:{ level_id: $(this).val() },
+            data:{ },
+            
             success:function(data)
             {
-                // console.log(data.years);
                 $( data.years ).each(function( index , year  ) {
                     
                     $('.years').append(
@@ -43,7 +43,8 @@ $(document).ready(function () {
         
 
         // if uncheck year remove the classes blongs to it  and remove the materials  also 
-        if ($(this).is(':checked')  == false ) {
+        if ( $(this).is(':checked')  == false ) {
+
             $("#year_"+$(this).val()).empty();  
             $('#materials_year_'+$(this).val()).remove(); 
 
@@ -67,28 +68,26 @@ $(document).ready(function () {
 
         $.ajax({
         
-            url:"/admin/teacher/get_classes",
+            url:"/admin/teacher/get_classes?year_id="+$(this).val(),
             method:'get',
-            data:{ year_id: $(this).val() },
+            data:{},
             success:function(data)
             {
-                // alert(data.year_id) ; 
+                //   start display  classes 
                 $( data.classes ).each(function( index , classe  ) {
-
-                    //  display  classes 
-                    $('#year_'+data.year['id']).append(
+                        $('#year_'+data.year['id']).append(
                         ' <div class="form-check form-check-inline">'+
                             '<input class="form-check-input" name = "classes[]" type="checkbox" value="'+classe['id']+'">'+
                             '<label class="form-check-label" for="inlineCheckbox1">'+classe['name']+'</label>'+
                         '</div>'
                     ); 
-
                 });
+                //   end display  classes 
 
                 // start display materials in this year 
                 var div  = $('<div class="input-group mb-2" id = "materials_year_'+data.year['id'] + '"> </div>') ; 
                 var sel = $('<select required autofocus name = "select_material_'+data.year['id'] + '" >'+
-                                    '<option value = "">Materials '+data.year['name']+ '</option> '+
+                                    '<option value = "" >Materials '+data.year['name']+ '</option> '+
                                 '</select>');
 
                 $(data.materials).each(function(index  , material) {
@@ -97,7 +96,8 @@ $(document).ready(function () {
                 div.append(sel); 
                 div.appendTo('.materials'); 
 
-                // end display materialvs in this year 
+                // end display materialvs in this year
+                
                 // add select box name to array materials_selectbox
                 materials_selectbox_names.push("select_material_"+data.year['id']);
                 $("input[name=materials_selectbox_names]").val(materials_selectbox_names) ; 
@@ -109,7 +109,5 @@ $(document).ready(function () {
 
         });
     });
-
     
-
 });

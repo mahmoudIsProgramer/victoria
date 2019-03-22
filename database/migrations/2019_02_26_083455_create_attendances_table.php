@@ -20,7 +20,9 @@ class CreateAttendancesTable extends Migration
             
             $table->integer('student_id')->unsigned()->nullable();
             $table->integer('class_id')->unsigned()->nullable();
-
+            $table->integer('years');
+            $table->integer('months');
+            $table->integer('days');
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
             $table->foreign('class_id')->references('id')->on('classes')->onDelete('cascade');
 

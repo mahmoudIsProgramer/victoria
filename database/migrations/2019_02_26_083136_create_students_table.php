@@ -25,6 +25,7 @@ class CreateStudentsTable extends Migration
             $table->string('email')->nullable();
             $table->string('student_id_in_school')->nullable(); // student number in school 
             $table->string('image')->nullable();
+            $table->rememberToken();
 
 
 

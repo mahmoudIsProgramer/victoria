@@ -36,9 +36,15 @@
                         @foreach ( $materials as $material  )
                         <div class="col-md-4 col-sm-6 mb-2">
                             <div class="school">
-                            <a href="{{url('admin/teacher/teachers_on_material').'/'.$school_id.'/'.$level_id.'/'.$year_id.'/'.$material->id}}">
-                                <h3 class="btn-warning text-center py-5">{{ $material->name }}</h3>
-                            </a>
+                            @if(  isset($unknown) && $unknown == "materialfiles" )
+                                <a href="{{url('admin/material_file_view').'/'.$school_id.'/'.$level_id.'/'.$year_id.'/'.$class_id.'/'.$material->id}}">
+                                    <h3 class="btn-warning text-center py-5">{{ $material->name }}</h3>
+                                </a>
+                            @else 
+                                <a href="{{url('admin/teachers_on_material').'/'.$school_id.'/'.$level_id.'/'.$year_id.'/'.$material->id}}">
+                                    <h3 class="btn-warning text-center py-5">{{ $material->name }}</h3>
+                                </a>
+                            @endif 
                             </div>
                         </div>
                         @endforeach

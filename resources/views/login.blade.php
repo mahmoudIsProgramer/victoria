@@ -19,6 +19,7 @@
                             <div class="form-row">
                             <form   method = 'POST'  action = "{{ url('user/login') }}" class="m-auto">
                                 @include('partials.not_found')
+                                                                
                                 @if ($errors->any()) 
                                     <div class="alert alert-danger">
                                         <ul>
@@ -49,8 +50,8 @@
                                     <div class="input-group mb-2">
                                         <select name = 'usertype' required autofocus class="form-control" >
                                         <option value = ''>User Type</option>
-                                        {{-- <option value = 'teacher' {{(old('usertype') =='teacher')?'selected':''}} >Teacher</option>
-                                        <option value = 'student' {{(old('usertype') =='student')?'selected':''}}>Student</option> --}}
+                                        <option value = 'teacher' {{(old('usertype') =='teacher')?'selected':''}} >Teacher</option>
+                                        <option value = 'student' {{(old('usertype') =='student')?'selected':''}}>Student</option> 
                                         <option value = 'admin'   {{(old('usertype') =='admin')?'selected':''}}>Admin</option>
                                         </select>
                                     </div>

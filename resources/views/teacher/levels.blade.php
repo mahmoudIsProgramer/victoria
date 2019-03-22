@@ -1,6 +1,7 @@
 @extends('layouts.adminapp')
 @section('content')
 
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-2"></div>
@@ -21,15 +22,18 @@
                 <!--schools-->
                 <section class="schools">
                 <div class="container">
-                    <div class="row">
-                        
-                        <div class="col-md-4 col-sm-6 mb-2">
+                    <div class="row"> 
+                        @if($levels)
+                        @foreach ( $levels as $level  )
+                        <div class = "col-md-4 col-sm-6 mb-2">
                             <div class="school">
-                            <a href="{{ url('admin/teacher/levels').'/'.$school_id }}">
-                                <h3 class="btn-warning text-center py-5">{{ $school->name }}</h3>
+                            <a href="{{ url('/teacher/'.$unknown.'/years').'/'.$school_id.'/'.$level->id }}">
+                                <h3 class="btn-warning text-center py-5"> {{ $level->name }}</h3>
                             </a>
                             </div>
                         </div>
+                        @endforeach
+                        @endif
                         
                     </div>
                 </div>
@@ -40,4 +44,6 @@
         </div>
     </div>
 </div>
+
+
 @endsection
